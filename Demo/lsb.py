@@ -15,7 +15,7 @@ def data2binary(data):
 
 # Giấu tin vào trong ảnh
 def hidedata(img, data):
-    data += '$$'    # ==> secret key
+    data += '$$'
     d_index = 0
     b_data = data2binary(data)
     len_data = len(b_data)
@@ -91,6 +91,7 @@ def steganography():
         print("===== Image Steganography LSB =====")
         print("1. Nhúng tin")
         print("2. Tách tin")
+        print("0. Thoát")
         
         luaChon = int(input("Nhập vào lựa chọn: "))
         
@@ -99,6 +100,9 @@ def steganography():
         elif luaChon == 2:
             ans = decode()
             print("Tin được nhúng là: " + ans)
+        elif luaChon == 0:
+            print("Exit !!")
+            break
         else:
             print("Nhập sai định dạng !!")
 
