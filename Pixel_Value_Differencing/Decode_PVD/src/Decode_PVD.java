@@ -10,6 +10,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class Decode_PVD extends javax.swing.JFrame {
 
@@ -39,6 +40,8 @@ public class Decode_PVD extends javax.swing.JFrame {
 
     public Decode_PVD() {
         initComponents();
+
+        btnReset.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -51,10 +54,8 @@ public class Decode_PVD extends javax.swing.JFrame {
         btnChooseFile = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtResultMessage = new javax.swing.JTextArea();
-        jLabel4 = new javax.swing.JLabel();
         btnDecode = new javax.swing.JButton();
         stegoImage = new javax.swing.JLabel();
-        txtLengthMessage = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         btnReset = new javax.swing.JButton();
 
@@ -81,9 +82,6 @@ public class Decode_PVD extends javax.swing.JFrame {
         txtResultMessage.setRows(5);
         jScrollPane2.setViewportView(txtResultMessage);
 
-        jLabel4.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
-        jLabel4.setText("Length message:");
-
         btnDecode.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         btnDecode.setText("Decode");
         btnDecode.addActionListener(new java.awt.event.ActionListener() {
@@ -93,8 +91,6 @@ public class Decode_PVD extends javax.swing.JFrame {
         });
 
         stegoImage.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        txtLengthMessage.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel6.setText("Result message:");
@@ -115,26 +111,25 @@ public class Decode_PVD extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(stegoImage, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnDecode, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addGap(25, 25, 25))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtStegoImage, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnChooseFile))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(stegoImage, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnDecode, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtLengthMessage, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addGap(25, 25, 25))
+                        .addComponent(btnChooseFile, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(185, 185, 185)
                 .addComponent(jLabel1)
@@ -154,14 +149,10 @@ public class Decode_PVD extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtLengthMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnDecode, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -173,78 +164,83 @@ public class Decode_PVD extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDecodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDecodeActionPerformed
-        btnDecode.setEnabled(false);
-        btnChooseFile.setEnabled(false);
-        btnReset.setEnabled(true);
-        
-        showImage();
+        if (txtStegoImage.getText().length() == 0) {
+            JOptionPane.showMessageDialog(null, "Hãy nhập đầy đủ các thông tin");
+        } else {
+            btnDecode.setEnabled(false);
+            btnChooseFile.setEnabled(false);
+            btnReset.setEnabled(true);
 
-        for (int i = 0; i < 64; i++) {
-            vecTable.add(4);
-        }
+            showImage();
 
-        getPixelRGB();
+            for (int i = 0; i < 64; i++) {
+                vecTable.add(4);
+            }
 
-        int msgLength = Integer.parseInt(txtLengthMessage.getText());
+            getPixelRGB();
 
-        colIndex = rowIndex = 0;
+            int msgLength = Integer.parseInt(txtStegoImage.getText().
+                    substring(txtStegoImage.getText().lastIndexOf("_") + 1,
+                            txtStegoImage.getText().lastIndexOf(".")));
 
-        String new_biner = "";
-        vecBinaryDecrypt.clear();
-        resetAll();
+            colIndex = rowIndex = 0;
 
-        for (int i = 0; i < msgLength * 8; i += 2) {
-            vecDI.add(Math.abs(vecRed.get(i) - vecRed.get(i + 1)));
+            String new_biner = "";
+            vecBinaryDecrypt.clear();
+            resetAll();
 
-            low = 0;
-            high = 0;
-            cek = 0;
+            for (int i = 0; i < msgLength * 8; i += 2) {
+                vecDI.add(Math.abs(vecRed.get(i) - vecRed.get(i + 1)));
 
-            for (int j = 0; j < vecTable.size(); j++) {
-                high += vecTable.get(j);
-                --high;
+                low = 0;
+                high = 0;
+                cek = 0;
 
-                if (vecDI.get(vecDI.size() - 1) >= low && vecDI.get(vecDI.size() - 1) <= high) {
-                    cek = i;
-                    vecLJ.add(low);
-                    vecUJ.add(high);
+                for (int j = 0; j < vecTable.size(); j++) {
+                    high += vecTable.get(j);
+                    --high;
+
+                    if (vecDI.get(vecDI.size() - 1) >= low && vecDI.get(vecDI.size() - 1) <= high) {
+                        cek = i;
+                        vecLJ.add(low);
+                        vecUJ.add(high);
+                    }
+
+                    low = ++high;
                 }
 
-                low = ++high;
+                vecWJ.add(vecUJ.get(vecUJ.size() - 1) - vecLJ.get(vecLJ.size() - 1) + 1);
+                vecTI.add(Math.log(vecWJ.get(vecWJ.size() - 1)) / Math.log(2));
+                vecDI2.add(vecDI.get(vecDI.size() - 1) - vecLJ.get(vecLJ.size() - 1));
+
+                String old_biner = Integer.toBinaryString(vecDI2.get(vecDI2.size() - 1));
+
+                int min = 2 - old_biner.length();
+
+                for (int j = 0; j < min; j++) {
+                    new_biner += "0";
+                }
+                new_biner += old_biner;
+
+//                System.out.println(new_biner);
+                if ((i + 2) % 8 == 0 && i != 0) {
+                    vecBinaryDecrypt.add(new_biner);
+                    new_biner = "";
+                } else if ((i + 2) >= msgLength * 8) {
+                    vecBinaryDecrypt.add(new_biner);
+                    new_biner = "";
+                }
             }
 
-            vecWJ.add(vecUJ.get(vecUJ.size() - 1) - vecLJ.get(vecLJ.size() - 1) + 1);
-            vecTI.add(Math.log(vecWJ.get(vecWJ.size() - 1)) / Math.log(2));
-            vecDI2.add(vecDI.get(vecDI.size() - 1) - vecLJ.get(vecLJ.size() - 1));
-
-            String old_biner = Integer.toBinaryString(vecDI2.get(vecDI2.size() - 1));
-
-            int min = 2 - old_biner.length();
-
-            for (int j = 0; j < min; j++) {
-                new_biner += "0";
+            String result = "";
+            for (int i = 0; i < vecBinaryDecrypt.size(); i++) {
+                String tmp = Integer.toString(Integer.parseInt(vecBinaryDecrypt.get(i), 2));
+                char tmp2 = (char) Integer.parseInt(tmp);
+                result += tmp2;
             }
-            new_biner += old_biner;
 
-            System.out.println(new_biner);
-
-            if ((i + 2) % 8 == 0 && i != 0) {
-                vecBinaryDecrypt.add(new_biner);
-                new_biner = "";
-            } else if ((i + 2) >= msgLength * 8) {
-                vecBinaryDecrypt.add(new_biner);
-                new_biner = "";
-            }
+            txtResultMessage.setText(result);
         }
-
-        String result = "";
-        for (int i = 0; i < vecBinaryDecrypt.size(); i++) {
-            String tmp = Integer.toString(Integer.parseInt(vecBinaryDecrypt.get(i), 2));
-            char tmp2 = (char) Integer.parseInt(tmp);
-            result += tmp2;
-        }
-
-        txtResultMessage.setText(result);
     }//GEN-LAST:event_btnDecodeActionPerformed
 
     private void btnChooseFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseFileActionPerformed
@@ -263,11 +259,13 @@ public class Decode_PVD extends javax.swing.JFrame {
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         txtStegoImage.setText("");
-        txtLengthMessage.setText("");
         txtResultMessage.setText("");
 
-        btnDecode.setVisible(true);
-        btnReset.setVisible(false);
+        btnChooseFile.setEnabled(true);
+        btnDecode.setEnabled(true);
+        btnReset.setEnabled(false);
+
+        stegoImage.setIcon(null);
 
         vecRed.clear();
         vecGreen.clear();
@@ -364,11 +362,9 @@ public class Decode_PVD extends javax.swing.JFrame {
     private javax.swing.JButton btnReset;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel stegoImage;
-    private javax.swing.JTextField txtLengthMessage;
     private javax.swing.JTextArea txtResultMessage;
     private javax.swing.JTextField txtStegoImage;
     // End of variables declaration//GEN-END:variables
