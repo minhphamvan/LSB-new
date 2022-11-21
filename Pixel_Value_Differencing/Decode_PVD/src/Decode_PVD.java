@@ -128,7 +128,7 @@ public class Decode_PVD extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtStegoImage, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnChooseFile, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnChooseFile)
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(185, 185, 185)
@@ -244,7 +244,7 @@ public class Decode_PVD extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDecodeActionPerformed
 
     private void btnChooseFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseFileActionPerformed
-        JFileChooser choose = new JFileChooser("/home/minh/Desktop/LSB-new/Pixel_Value_Differencing/Image_Test");
+        JFileChooser choose = new JFileChooser("/home/minh/Desktop/LSB-new/Pixel_Value_Differencing/Image");
 
         int rVal = choose.showOpenDialog(this);
 
