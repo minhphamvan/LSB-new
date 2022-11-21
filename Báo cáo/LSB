@@ -1,37 +1,3 @@
-Secret_text: array_1
-Chia hình ảnh thành 2 phần: part_1 (array_2) & part_2 (array_3)
-
-so sánh lần lượt 2 bit của secret_text với 2 bit LSB của từng điểm ảnh trong part_1:
-	+ nếu bằng nhau --> lưu lại vị trí của 2 bit LSB đó (row, column)
-	+ nếu không bằng nhau --> tiếp tục làm cho đến khi hết các bit của secret_text
---> các vị trí LSB này sẽ được lưu vào array_4
-
-
-secret_text = 11
-
-- Image:
-{15, 2, 41, 35}
-{54, 33, 11, 0}
-{33, 14, 68, 31}
-{22, 21, 40, 21}
-
-- Part 1:
-{15, 2, 41, 35}
-{54, 33, 11, 0}
-
-array_2: 00001111 00000010 00101001 00100011 00110110 00100001 00001011 00000000
-
-array_4: [6,7] = 00000110 00000111
-
-- Part 2:
-{33, 14, 68, 31}
-{22, 21, 40, 21}
-
-array_3: 	00100001 00001110 01000100 00011111 00010110 00010101 00101000 00010101 
-array_3: 	00100000 00001100 01000101 00011110 00010100 00010100 00101001 00010111 
-
-=============================================================================================================
-
 - Chia ảnh ban đầu thành 3 matrix của các pixel Red, Green, Blue
 
 - Secret key --> [] bits
@@ -39,8 +5,6 @@ array_3: 	00100000 00001100 01000101 00011110 00010100 00010100 00101001 0001011
 - Secret_key & RED_matrix được sử dụng để quyết định hiden_information sẽ được replace trong GREEN_matrix hay BLUE_matrix. 
   Mỗi bit của secret_key sẽ XOR với từng bit LSB của RED_matrix. Kết quả của việc XOR trên sẽ quyết định thông tin sẽ được replace trong GREEN_matrix hay BLUE_matrix.
   Làm tương tự cho đến khi việc giấu hiden_information hoàn thành. 
-
-
 
 ==> Ưu điểm: 
 	+ Không có sự thay đổi có thể phát hiện được giữa ảnh stego và cover khi quan sát bằng mắt thường.

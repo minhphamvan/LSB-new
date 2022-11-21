@@ -45,8 +45,8 @@ def encode():
     img = Image.open(img_name, 'r')
     w, h = img.size
 
-    # Dung lượng tin giấu ==> tỉ lệ 10%
-    length_data = int (w * h * 3 // 8 * 0.1)
+    # Dung lượng tin giấu ==> tỉ lệ 50%
+    length_data = int (w * h * 3 // 8 * 0.5)
     print(length_data)
     data = 'a' * int (length_data)
 

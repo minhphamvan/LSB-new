@@ -73,8 +73,8 @@ def encode():
     img = Image.open(img_name, 'r')
     w, h = img.size
 
-    # Dung lượng tin giấu ==> tỉ lệ 10%
-    length_data = int (w * h // 8 * 0.2)
+    # Dung lượng tin giấu ==> tỉ lệ 50%
+    length_data = int (w * h // 8 * 0.5)
     print(length_data)
     data = get_random_string(int (length_data))
     # data = input("Nhập nội dung cần nhúng: ")
