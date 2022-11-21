@@ -22,9 +22,6 @@ public class Decode_PVD extends javax.swing.JFrame {
     Vector<Integer> vecGreen = new Vector<>();
     Vector<Integer> vecBlue = new Vector<>();
 
-    Vector<Integer> vecASCII = new Vector<>();
-    Vector<String> vecBinaryWord = new Vector<>();
-
     Vector<Integer> vecTable = new Vector<>();
 
     Vector<Integer> vecDI = new Vector<>();
@@ -34,7 +31,6 @@ public class Decode_PVD extends javax.swing.JFrame {
     Vector<Integer> vecUJ = new Vector<>();
     Vector<Double> vecTI = new Vector<>();
     Vector<Integer> vecTI2 = new Vector<>();
-    Vector<Integer> vecM = new Vector<>();
 
     int colIndex, rowIndex;
     int low, high, cek;
@@ -51,10 +47,10 @@ public class Decode_PVD extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtInputFile = new javax.swing.JTextField();
-        btnChoose = new javax.swing.JButton();
+        txtStegoImage = new javax.swing.JTextField();
+        btnChooseFile = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        txtResultMsg = new javax.swing.JTextArea();
+        txtResultMessage = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         btnDecode = new javax.swing.JButton();
         stegoImage = new javax.swing.JLabel();
@@ -71,19 +67,19 @@ public class Decode_PVD extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel2.setText("Stego Image:");
 
-        txtInputFile.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
+        txtStegoImage.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
 
-        btnChoose.setText("Choose");
-        btnChoose.addActionListener(new java.awt.event.ActionListener() {
+        btnChooseFile.setText("Choose");
+        btnChooseFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChooseActionPerformed(evt);
+                btnChooseFileActionPerformed(evt);
             }
         });
 
-        txtResultMsg.setColumns(20);
-        txtResultMsg.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
-        txtResultMsg.setRows(5);
-        jScrollPane2.setViewportView(txtResultMsg);
+        txtResultMessage.setColumns(20);
+        txtResultMessage.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
+        txtResultMessage.setRows(5);
+        jScrollPane2.setViewportView(txtResultMessage);
 
         jLabel4.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel4.setText("Length message:");
@@ -121,33 +117,27 @@ public class Decode_PVD extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtInputFile, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtStegoImage, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnChoose))
+                        .addComponent(btnChooseFile))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addComponent(stegoImage, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel4)
-                                .addComponent(jScrollPane2)
-                                .addComponent(txtLengthMessage))
-                            .addComponent(jLabel6))
-                        .addGap(25, 25, 25))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(99, 99, 99))))
+                    .addComponent(jLabel6)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btnDecode, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtLengthMessage, javax.swing.GroupLayout.Alignment.LEADING)))
+                .addGap(25, 25, 25))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(278, 278, 278)
-                        .addComponent(btnDecode, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(185, 185, 185)
-                        .addComponent(jLabel1)))
+                .addGap(185, 185, 185)
+                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -158,9 +148,9 @@ public class Decode_PVD extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtInputFile, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                        .addComponent(txtStegoImage, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(btnChoose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnChooseFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -171,18 +161,22 @@ public class Decode_PVD extends javax.swing.JFrame {
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDecode, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(stegoImage, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(btnDecode, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDecodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDecodeActionPerformed
+        btnDecode.setEnabled(false);
+        btnChooseFile.setEnabled(false);
+        btnReset.setEnabled(true);
+        
         showImage();
 
         for (int i = 0; i < 64; i++) {
@@ -250,25 +244,46 @@ public class Decode_PVD extends javax.swing.JFrame {
             result += tmp2;
         }
 
-        txtResultMsg.setText(result);
+        txtResultMessage.setText(result);
     }//GEN-LAST:event_btnDecodeActionPerformed
 
-    private void btnChooseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseActionPerformed
+    private void btnChooseFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseFileActionPerformed
         JFileChooser choose = new JFileChooser("/home/minh/Desktop/LSB-new/Pixel_Value_Differencing/Image_Test");
 
         int rVal = choose.showOpenDialog(this);
 
         if (rVal == JFileChooser.APPROVE_OPTION) {
-            txtInputFile.setText(choose.getCurrentDirectory().toString() + "/" + choose.getSelectedFile().getName());
+            txtStegoImage.setText(choose.getCurrentDirectory().toString() + "/" + choose.getSelectedFile().getName());
         }
 
         if (rVal == JFileChooser.CANCEL_OPTION) {
-            txtInputFile.setText("");
+            txtStegoImage.setText("");
         }
-    }//GEN-LAST:event_btnChooseActionPerformed
+    }//GEN-LAST:event_btnChooseFileActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
-        // TODO add your handling code here:
+        txtStegoImage.setText("");
+        txtLengthMessage.setText("");
+        txtResultMessage.setText("");
+
+        btnDecode.setVisible(true);
+        btnReset.setVisible(false);
+
+        vecRed.clear();
+        vecGreen.clear();
+        vecBlue.clear();
+
+        vecTable.clear();
+
+        vecDI.clear();
+        vecDI2.clear();
+        vecLJ.clear();
+        vecWJ.clear();
+        vecUJ.clear();
+        vecTI.clear();
+        vecTI2.clear();
+
+        vecBinaryDecrypt.clear();
     }//GEN-LAST:event_btnResetActionPerformed
 
     void getPixelRGB() {
@@ -277,7 +292,7 @@ public class Decode_PVD extends javax.swing.JFrame {
             vecGreen.clear();
             vecBlue.clear();
 
-            img = ImageIO.read(new File(txtInputFile.getText()));
+            img = ImageIO.read(new File(txtStegoImage.getText()));
 
             width = img.getWidth();
             height = img.getHeight();
@@ -304,12 +319,11 @@ public class Decode_PVD extends javax.swing.JFrame {
         vecTI.clear();
         vecTI2.clear();
         vecDI2.clear();
-        vecM.clear();
     }
 
     void showImage() {
         try {
-            img = ImageIO.read(new File(txtInputFile.getText()));
+            img = ImageIO.read(new File(txtStegoImage.getText()));
 
             stegoImage.setIcon(scaleImage(new ImageIcon(img), 600, 400));
         } catch (IOException ex) {
@@ -345,7 +359,7 @@ public class Decode_PVD extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnChoose;
+    private javax.swing.JButton btnChooseFile;
     private javax.swing.JButton btnDecode;
     private javax.swing.JButton btnReset;
     private javax.swing.JLabel jLabel1;
@@ -354,8 +368,8 @@ public class Decode_PVD extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel stegoImage;
-    private javax.swing.JTextField txtInputFile;
     private javax.swing.JTextField txtLengthMessage;
-    private javax.swing.JTextArea txtResultMsg;
+    private javax.swing.JTextArea txtResultMessage;
+    private javax.swing.JTextField txtStegoImage;
     // End of variables declaration//GEN-END:variables
 }

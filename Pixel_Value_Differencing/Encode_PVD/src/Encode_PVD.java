@@ -21,25 +21,26 @@ public class Encode_PVD extends javax.swing.JFrame {
     int[] pixels;
     Color c;
 
+    // RGB
     Vector<Integer> vecRed = new Vector<>();
     Vector<Integer> vecGreen = new Vector<>();
     Vector<Integer> vecBlue = new Vector<>();
 
-    Vector<Integer> vecASCII = new Vector<>();
+    Vector<Integer> vecDI = new Vector<>(); // di
+    Vector<Integer> vecDI2 = new Vector<>(); // di'
 
-    Vector<String> vecBinaryWord = new Vector<>();
+    Vector<Integer> vecLJ = new Vector<>(); // Lj
+    Vector<Integer> vecUJ = new Vector<>(); // Uj
+    Vector<Integer> vecWJ = new Vector<>(); // Wj = Uj - Lj + 1
 
-    Vector<Integer> vecTable = new Vector<>();
-    Vector<Integer> vecDI = new Vector<>();
-    Vector<Integer> vecDI2 = new Vector<>();
-    Vector<Integer> vecLJ = new Vector<>();
-    Vector<Integer> vecWJ = new Vector<>();
-    Vector<Integer> vecUJ = new Vector<>();
-    Vector<Integer> vecTI2 = new Vector<>();
-    Vector<Integer> vecM = new Vector<>();
-    Vector<Double> vecTI = new Vector<>();
+    Vector<Double> vecTI = new Vector<>(); // ti = [log(Wj)]
+    Vector<Integer> vecTI2 = new Vector<>(); // ti'
 
-    Vector<String> vecBinaryDecrypt = new Vector<>();
+    Vector<Integer> vecM = new Vector<>(); // message M
+    Vector<Integer> vecASCII = new Vector<>(); // ASCII of all pixels
+    Vector<String> vecBinaryWord = new Vector<>(); // the binary word from all character of the inserted message
+
+    Vector<Integer> vecTable = new Vector<>(); // range bit that can be inserted into the current pixel
 
     int colIndex, rowIndex;
     int low, high, cek;
@@ -59,10 +60,10 @@ public class Encode_PVD extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtInputFile = new javax.swing.JTextField();
+        txtCleanImage = new javax.swing.JTextField();
         btnChooseFile = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtInputMsg = new javax.swing.JTextArea();
+        txtMessage = new javax.swing.JTextArea();
         btnEncode = new javax.swing.JButton();
         labelCleanImage = new javax.swing.JLabel();
         stegoImage = new javax.swing.JLabel();
@@ -84,7 +85,7 @@ public class Encode_PVD extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel3.setText("Message:");
 
-        txtInputFile.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
+        txtCleanImage.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
 
         btnChooseFile.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         btnChooseFile.setText("Choose");
@@ -94,10 +95,10 @@ public class Encode_PVD extends javax.swing.JFrame {
             }
         });
 
-        txtInputMsg.setColumns(20);
-        txtInputMsg.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
-        txtInputMsg.setRows(5);
-        jScrollPane1.setViewportView(txtInputMsg);
+        txtMessage.setColumns(20);
+        txtMessage.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
+        txtMessage.setRows(5);
+        jScrollPane1.setViewportView(txtMessage);
 
         btnEncode.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         btnEncode.setText("Encode");
@@ -149,7 +150,7 @@ public class Encode_PVD extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addComponent(txtInputFile, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtCleanImage, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
                                                 .addComponent(btnChooseFile))
                                             .addComponent(txtNameStegoImage, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -187,7 +188,7 @@ public class Encode_PVD extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtInputFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCleanImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel2)
                                     .addComponent(btnChooseFile)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -215,7 +216,7 @@ public class Encode_PVD extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEncodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncodeActionPerformed
-        if (txtInputFile.getText().length() == 0)
+        if (txtCleanImage.getText().length() == 0)
             JOptionPane.showMessageDialog(null, "Image must be chosen");
         else {
             try {
@@ -245,16 +246,38 @@ public class Encode_PVD extends javax.swing.JFrame {
         int rVal = choose.showOpenDialog(this);
 
         if (rVal == JFileChooser.APPROVE_OPTION) {
-            txtInputFile.setText(choose.getCurrentDirectory().toString() + "/" + choose.getSelectedFile().getName());
+            txtCleanImage.setText(choose.getCurrentDirectory().toString() + "/" + choose.getSelectedFile().getName());
         }
 
         if (rVal == JFileChooser.CANCEL_OPTION) {
-            txtInputFile.setText("");
+            txtCleanImage.setText("");
         }
     }//GEN-LAST:event_btnChooseFileActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
-        // TODO add your handling code here:
+        txtCleanImage.setText("");
+        txtNameStegoImage.setText("");
+        txtMessage.setText("");
+
+        btnEncode.setEnabled(true);
+        btnChooseFile.setEnabled(true);
+        btnReset.setEnabled(false);
+
+        vecRed.clear();
+        vecGreen.clear();
+        vecBlue.clear();
+
+        vecDI.clear();
+        vecDI2.clear();
+        vecLJ.clear();
+        vecUJ.clear();
+        vecWJ.clear();
+        vecTI.clear();
+        vecTI2.clear();
+        vecM.clear();
+        vecASCII.clear();
+        vecBinaryWord.clear();
+        vecTable.clear();
     }//GEN-LAST:event_btnResetActionPerformed
 
     void getPixelRGB() {
@@ -263,7 +286,7 @@ public class Encode_PVD extends javax.swing.JFrame {
             vecGreen.clear();
             vecBlue.clear();
 
-            img = ImageIO.read(new File(txtInputFile.getText()));
+            img = ImageIO.read(new File(txtCleanImage.getText()));
             width = img.getWidth();
             height = img.getHeight();
 
@@ -284,7 +307,7 @@ public class Encode_PVD extends javax.swing.JFrame {
     void setBinaryText() {
         vecASCII.clear();
 
-        String message = txtInputMsg.getText();
+        String message = txtMessage.getText();
         for (int i = 0; i < message.length(); i++) {
             char temp = message.charAt(i);
             vecASCII.add((int) temp);
@@ -322,7 +345,9 @@ public class Encode_PVD extends javax.swing.JFrame {
         for (int a = 0; a < vecBinaryWord.size(); a++) {
             for (int b = 0; b < 8; b += 2) {
                 vecDI.add(Math.abs(vecRed.get(colIndex) - vecRed.get(colIndex + 1)));
+
                 low = high = cek = 0;
+
                 for (int i = 0; i < vecTable.size(); i++) {
                     high += vecTable.get(i);
                     --high;
@@ -333,13 +358,18 @@ public class Encode_PVD extends javax.swing.JFrame {
                     }
                     low = ++high;
                 }
+
                 vecWJ.add(vecUJ.get(vecUJ.size() - 1) - vecLJ.get(vecLJ.size() - 1) + 1);
                 vecTI.add(Math.log(vecWJ.get(vecWJ.size() - 1)) / Math.log(2));
+
                 int sizeBit = vecTI.get(vecTI.size() - 1).intValue();
                 int angka = Integer.parseInt(vecBinaryWord.get(a).substring(b, b + sizeBit), sizeBit);
+
                 vecTI2.add(angka);
                 vecDI2.add(vecTI2.get(vecTI2.size() - 1) + vecLJ.get(vecLJ.size() - 1));
+
                 vecM.add(Math.abs(vecDI2.get(vecDI2.size() - 1) - vecDI.get(vecDI.size() - 1)));
+
                 if (vecRed.get(colIndex) >= vecRed.get(colIndex + 1)) {
                     if (vecDI2.get(vecDI2.size() - 1) > vecDI.get(vecDI.size() - 1)) {
                         vecRed.set(colIndex, vecRed.get(colIndex) + (int) Math.ceil(vecM.get(vecM.size() - 1) / 2f));
@@ -357,6 +387,7 @@ public class Encode_PVD extends javax.swing.JFrame {
                         vecRed.set(colIndex + 1, vecRed.get(colIndex + 1) - (int) Math.floor(vecM.get(vecM.size() - 1) / 2f));
                     }
                 }
+
                 colIndex += 2;
             }
         }
@@ -370,7 +401,7 @@ public class Encode_PVD extends javax.swing.JFrame {
 
     void showImage() throws IOException {
         try {
-            img = ImageIO.read(new File(txtInputFile.getText()));
+            img = ImageIO.read(new File(txtCleanImage.getText()));
             cleanImage.setIcon(scaleImage(new ImageIcon(img), 600, 400));
         } catch (IOException ex) {
             System.out.println(ex);
@@ -384,7 +415,7 @@ public class Encode_PVD extends javax.swing.JFrame {
         raster.setDataElements(0, 0, img.getWidth(), img.getHeight(), pixels);
         stegoImage.setIcon(scaleImage(new ImageIcon(image), 600, 400));
 
-        File outputfile = new File(txtInputFile.getText().substring(0, txtInputFile.getText().lastIndexOf("/") + 1) + txtNameStegoImage.getText().toString() + ".png");
+        File outputfile = new File(txtCleanImage.getText().substring(0, txtCleanImage.getText().lastIndexOf("/") + 1) + txtNameStegoImage.getText().toString() + ".png");
         ImageIO.write(image, "png", outputfile);
     }
 
@@ -429,8 +460,8 @@ public class Encode_PVD extends javax.swing.JFrame {
     private javax.swing.JLabel labelCleanImage;
     private javax.swing.JLabel labelStegoImage;
     private javax.swing.JLabel stegoImage;
-    private javax.swing.JTextField txtInputFile;
-    private javax.swing.JTextArea txtInputMsg;
+    private javax.swing.JTextField txtCleanImage;
+    private javax.swing.JTextArea txtMessage;
     private javax.swing.JTextField txtNameStegoImage;
     // End of variables declaration//GEN-END:variables
 }
